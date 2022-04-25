@@ -1,6 +1,12 @@
 #include <iostream>
 #include <fstream>
+#include <algorithm>
+#include <string>
+#include <cstring>
 using namespace std;
+void countWord( fstream & file);
+
+
 int main(){
     string fileName;
    cout << "Please enter the file name (.txt):  ";
@@ -16,7 +22,8 @@ int main(){
     file.close(); //close the file to open it again but in various moods
 
    file.open(fileName, ios:: in | ios:: out | ios :: app);
-   while (true) {
+   while (true)
+   {
        cout << "\n\t\tPlease pick one option ";
        cout << "\n1. Add new text to the end of the file \n";
        cout << "2. Display the content of the file\n";
@@ -36,14 +43,38 @@ int main(){
        cout << "\n--> ";
        int option;
        cin >> option;
+        if (option == 11){
+            countWord(file);
+        }
+        else if (option == 15)
+        {
+            file.close();
+            break;
+        }
+        else if (option==16){
+            break;
+        }
 
-      if (option==16)
-          break;
    }
 
+}
 
+void countWord( fstream & file){
+    int c= 0; //start the counting
+    string countedWord;
+    cout << "Please enter the word: ";
+    cin >> countedWord ;  //get the required word from the user
+    transform(countedWord.begin(), countedWord.end(),countedWord.begin(),:: tolower);       //convert the counted word to lower case so the counting will be insensitive
+    while(not file.eof()){                                 //to continue to check and count to the end of the file
+        string word;
+        file >> word ;   //get word by word from the file's buffer
+        transform(word.begin(), word.end(),word.begin(), :: tolower); //to void sensitive search
+        if (word == countedWord){                    //compare the counted word by each word in the buffer
+            c++ ;                            //increase the counter by one if the counted word is fond
+        }
+    }
+    cout <<countedWord <<" is repeated "<< c << " times."; //printing the final counter of the required word
+    cout << "\n__________________________________________________________________\n";
 
-
-file.close();
 }
 
