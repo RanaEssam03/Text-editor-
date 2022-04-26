@@ -20,6 +20,7 @@ int main(){
     }
     else {
         cout << "This File Already Exists";
+        file<<"ahmed";
     }
     file.close(); //close the file to open it again but in various moods
 
