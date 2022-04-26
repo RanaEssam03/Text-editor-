@@ -17,8 +17,9 @@ int main(){
    cout << "Please enter the file name (.txt):  ";
    cin.getline(fileName,81);
    fstream file;
-   file.open(fileName, ios:: out); //opened the file to read only to check if it exits or not
+   file.open(fileName, ios:: in); //opened the file to read only to check if it exits or not
     if (file.fail()){
+        file.open(fileName, ios:: in | ios:: out | ios :: app);
         cout << "This is a new file. I created it for you " << char(1);
     }
     else {
@@ -26,7 +27,7 @@ int main(){
     }
     file.close(); //close the file to open it again but in various moods
 
-   //file.open(fileName, ios:: in | ios:: out | ios :: app);
+   file.open(fileName, ios:: in | ios:: out | ios :: app);
    while (true)
    {
        cout << "\n\t\tPlease pick one option ";
@@ -49,18 +50,14 @@ int main(){
        int option;
        cin >> option;
        if(option == 1){
-           file.open(fileName,ios::app);
            appendText(file);
        }
        else if (option == 2){
-           file.open(fileName,ios::in);
            Displaycontent(file);
        }
        else if(option == 3){
-           file.open(fileName,ios::out);
        }
         else if (option == 11){
-            file.open(fileName,ios::in);
             countWord(file);
         }
         else if (option == 15)
@@ -97,11 +94,10 @@ void countWord( fstream & file){
 void appendText(fstream & file){
     char text[81];
     cout << "enter text you want to append:";
-    cout << endl;
     cin.ignore();
     cin.getline(text,81);
     file << text;
-    file.close();
+
 }
 void Displaycontent(fstream & file){
     char ch;
@@ -109,7 +105,7 @@ void Displaycontent(fstream & file){
       cout << ch;
       file.get(ch);
     }
-    file.close();
+
 
 
 }
