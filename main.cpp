@@ -84,10 +84,12 @@ void countWord( fstream & file){
 }
 void appendText(fstream & file){
     file.open(fileName,ios::app);
-    char ch;
-    cout << "enter text you want to append:\n";
-    cin.get(ch);
-    file.put(ch);
+    char text[81];
+    cout << "enter text you want to append:";
+    cout << endl;
+    cin.ignore();
+    cin.getline(text,81);
+    file << text;
 }
 
 
