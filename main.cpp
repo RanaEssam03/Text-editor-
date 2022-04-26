@@ -101,9 +101,10 @@ void appendText(fstream & file){
 }
 void Displaycontent(fstream & file){
     char ch;
+    cout << endl;
     while(!file.eof()){
-      cout << ch;
-      file.get(ch);
+    cout << file.rdbuf();
+    break;
     }
 
 
