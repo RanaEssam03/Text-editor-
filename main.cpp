@@ -26,7 +26,7 @@ int main(){
     }
     file.close(); //close the file to open it again but in various moods
 
-   file.open(fileName, ios:: in | ios:: out | ios :: app);
+   //file.open(fileName, ios:: in | ios:: out | ios :: app);
    while (true)
    {
        cout << "\n\t\tPlease pick one option ";
@@ -49,12 +49,15 @@ int main(){
        int option;
        cin >> option;
        if(option == 1){
+           file.open(fileName,ios::app);
            appendText(file);
        }
        else if (option == 2){
+           file.open(fileName,ios::in);
            Displaycontent(file);
        }
         else if (option == 11){
+            file.open(fileName,ios::in);
             countWord(file);
         }
         else if (option == 15)
@@ -89,7 +92,6 @@ void countWord( fstream & file){
 
 }
 void appendText(fstream & file){
-    file.open(fileName,ios::app);
     char text[81];
     cout << "enter text you want to append:";
     cout << endl;
@@ -100,13 +102,15 @@ void appendText(fstream & file){
 }
 void Displaycontent(fstream & file){
     char ch[1000];
-    file.open(fileName,ios::in);
     while(!file.eof()){
-        file >> ch;
-        cout << ch;
+       file.getline(ch,1000,'\n');
+        cout << ch <<endl;
     }
     file.close();
 
+
+}
+void empty_file(fstream & file){
 
 }
 
