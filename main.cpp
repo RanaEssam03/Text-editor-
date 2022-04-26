@@ -5,14 +5,16 @@
 #include <cstring>
 using namespace std;
 void countWord( fstream & file);
+void appendText(fstream &file);
+char fileName[81];
 
 
 int main(){
-    string fileName;
+    char fileName[81];
    cout << "Please enter the file name (.txt):  ";
-   cin >> fileName;
+   cin.getline(fileName,81);
    fstream file;
-   file.open(fileName, ios:: in); //opened the file to read only to check if it exits or not
+   file.open(fileName, ios:: out); //opened the file to read only to check if it exits or not
     if (file.fail()){
         cout << "This is a new file. I created it for you " << char(1);
     }
@@ -21,7 +23,7 @@ int main(){
     }
     file.close(); //close the file to open it again but in various moods
 
-   file.open(fileName, ios:: in | ios:: out | ios :: app);
+   //file.open(fileName, ios:: in | ios:: out | ios :: app);
    while (true)
    {
        cout << "\n\t\tPlease pick one option ";
@@ -43,7 +45,10 @@ int main(){
        cout << "\n--> ";
        int option;
        cin >> option;
-        if (option == 11){
+       if(option == 1){
+           appendText(file);
+       }
+        else if (option == 11){
             countWord(file);
         }
         else if (option == 15)
@@ -77,4 +82,12 @@ void countWord( fstream & file){
     cout << "\n__________________________________________________________________\n";
 
 }
+void appendText(fstream & file){
+    file.open(fileName,ios::app);
+    char ch;
+    cout << "enter text you want to append:\n";
+    cin.get(ch);
+    file.put(ch);
+}
+
 
