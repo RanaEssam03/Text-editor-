@@ -8,6 +8,8 @@ void countWord( fstream & file);
 void appendText(fstream &file);
 void Displaycontent(fstream&file);
 void empty_file(fstream&file);
+void encrypt(fstream&file);
+void decrypt(fstream&file);
 
 char fileName[81];
 
@@ -50,8 +52,7 @@ int main(){
        int option;
        cin >> option;
        if(option == 1){
-           //file.close();
-           file.open(fileName,ios::out|ios::app);
+           file.open(fileName,ios::app);
            appendText(file);
        }
        else if (option == 2){
@@ -59,9 +60,12 @@ int main(){
            Displaycontent(file);
        }
        else if(option == 3){
-           //file.close();
            file.open(fileName,ios::out|ios::trunc);
            empty_file(file);
+       }
+       else if (option == 4){
+           file.open(fileName,ios::in|ios::out);
+           encrypt(file);
        }
         else if (option == 11){
             countWord(file);
@@ -119,6 +123,28 @@ void Displaycontent(fstream & file){
 void empty_file(fstream & file){
    file << "";
    cout << "done"<<endl;
+}
+void encrypt(fstream & file){
+    string word;
+    char ch;
+    while(!file.eof()){
+        file.get(ch);
+
+    if(ch == 'z'){
+        file.put('a');
+    }
+    else if(ch=='Z'){
+        file.put('A');
+    }
+    else{file<<(char)ch+1;
+
+    }
+
+    }
+    cout << "encryption done"<<endl;
+
+
+
 }
 
 
