@@ -1,0 +1,17 @@
+# ninja log v5
+0	1828	6726814214734320	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+1832	2120	6726814217606643	Text_editor_.exe	d3e3d54d177e12dd
+4	582	6726817609833295	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+582	703	6726817610974901	Text_editor_.exe	d3e3d54d177e12dd
+6	715	6726819745540401	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+716	905	6726819747394461	Text_editor_.exe	d3e3d54d177e12dd
+3	769	6726823236185403	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+769	1578	6726823244235485	Text_editor_.exe	d3e3d54d177e12dd
+6	470	6726825674451708	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+471	593	6726825675612164	Text_editor_.exe	d3e3d54d177e12dd
+6	574	6726830383970275	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+575	754	6726830385745546	Text_editor_.exe	d3e3d54d177e12dd
+6	462	6726830887395953	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+463	579	6726830888517459	Text_editor_.exe	d3e3d54d177e12dd
+7	480	6726832006306214	CMakeFiles/Text_editor_.dir/main.cpp.obj	f03df8e81804d4f0
+480	610	6726832007566305	Text_editor_.exe	d3e3d54d177e12dd
