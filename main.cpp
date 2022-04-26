@@ -6,6 +6,9 @@
 using namespace std;
 void countWord( fstream & file);
 void appendText(fstream &file);
+void Displaycontent(fstream&file);
+void empty_file(fstream&file);
+
 char fileName[81];
 
 
@@ -14,17 +17,16 @@ int main(){
    cout << "Please enter the file name (.txt):  ";
    cin.getline(fileName,81);
    fstream file;
-   file.open(fileName, ios:: out); //opened the file to read only to check if it exits or not
+   file.open(fileName, ios:: in); //opened the file to read only to check if it exits or not
     if (file.fail()){
         cout << "This is a new file. I created it for you " << char(1);
     }
     else {
         cout << "This File Already Exists";
-        file<<"ahmed";
     }
     file.close(); //close the file to open it again but in various moods
 
-   //file.open(fileName, ios:: in | ios:: out | ios :: app);
+   file.open(fileName, ios:: in | ios:: out | ios :: app);
    while (true)
    {
        cout << "\n\t\tPlease pick one option ";
@@ -48,6 +50,9 @@ int main(){
        cin >> option;
        if(option == 1){
            appendText(file);
+       }
+       else if (option == 2){
+           Displaycontent(file);
        }
         else if (option == 11){
             countWord(file);
@@ -91,6 +96,18 @@ void appendText(fstream & file){
     cin.ignore();
     cin.getline(text,81);
     file << text;
+    file.close();
+}
+void Displaycontent(fstream & file){
+    char ch[1000];
+    file.open(fileName,ios::in);
+    while(!file.eof()){
+        file >> ch;
+        cout << ch;
+    }
+    file.close();
+
+
 }
 
 
