@@ -17,7 +17,7 @@ int main(){
    cout << "Please enter the file name (.txt):  ";
    cin.getline(fileName,81);
    fstream file;
-   file.open(fileName, ios:: in); //opened the file to read only to check if it exits or not
+   file.open(fileName, ios:: out); //opened the file to read only to check if it exits or not
     if (file.fail()){
         cout << "This is a new file. I created it for you " << char(1);
     }
@@ -55,6 +55,9 @@ int main(){
        else if (option == 2){
            file.open(fileName,ios::in);
            Displaycontent(file);
+       }
+       else if(option == 3){
+           file.open(fileName,ios::out);
        }
         else if (option == 11){
             file.open(fileName,ios::in);
@@ -101,16 +104,17 @@ void appendText(fstream & file){
     file.close();
 }
 void Displaycontent(fstream & file){
-    char ch[1000];
+    char ch;
     while(!file.eof()){
-       file.getline(ch,1000,'\n');
-        cout << ch <<endl;
+      cout << ch;
+      file.get(ch);
     }
     file.close();
 
 
 }
 void empty_file(fstream & file){
+
 
 }
 
