@@ -102,42 +102,42 @@ void countWord( fstream & file){
 
 }
 void appendText(fstream & file){
-    file.open(fileName,ios::app);
+    file.open(fileName,ios::app); // opening file in append mode
     char text[81];
     cout << "enter text you want to append:";
     cin.ignore();
     cin.getline(text,81);
-    file << text;
+    file << text; // appending text to the end of the file
 
 }
 void Displaycontent(fstream & file){
-    file.open(fileName,ios::in);
+    file.open(fileName,ios::in); // opening the file in read mode
     char ch;
     cout << endl; //flush
-    cout << file.rdbuf();
+    cout << file.rdbuf(); //displaying the buffer
 }
 void empty_file(fstream & file){
-    file.open(fileName,ios::out|ios::trunc);
+    file.open(fileName,ios::out|ios::trunc); // deleting content in the file
     file << "";
    cout << "done"<<endl;
 }
 void encrypt(fstream & file) {
-    file.open(fileName,ios::in|ios::out);
-    vector<char> vector_file;
+    file.open(fileName,ios::in|ios::out); // read and write mode
+    vector<char> vector_file;// a vector to store all the characters from the file and then shift them
     char ch;
     cout << endl;
     while (!file.eof()) {
         file.get(ch);
-        vector_file.push_back(ch);
+        vector_file.push_back(ch); //storing the file characters in the vector
     }
     file.close();
-    file.open(fileName,ios::out|ios::trunc);
+    file.open(fileName,ios::out|ios::trunc); // deleting the file content
     file.close();
-    file.open(fileName,ios::out);
+    file.open(fileName,ios::out); //opening the file in write mode to write shifted characters in it
     for(int i =0;i<vector_file.size()-1;i++){
-        if(vector_file[i] == 'z'){file<<'a';}
+        if(vector_file[i] == 'z'){file<<'a';}  // z after shifting is a
         else if(vector_file[i]=='Z'){file<<'A';}
-        else{file << (char)(vector_file[i]+1);}
+        else{file << (char)(vector_file[i]+1);} // shifting every character except z
     }
     cout << "file encrypted succefully"<<endl;
 }
