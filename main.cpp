@@ -4,6 +4,7 @@
 #include <string>
 #include <cstring>
 #include<vector>
+#include<sstream>
 using namespace std;
 void countWord( fstream & file);
 void appendText(fstream &file);
@@ -72,7 +73,7 @@ int main(){
         else if (option == 15)
         {
             file.close();
-            break;
+            //break;
         }
         else if (option==16){
             break;
