@@ -15,6 +15,7 @@ void decrypt(fstream&file);
 void upperCase(fstream &file);
 void lowerCase(fstream &file);
 void firstIsUpper (fstream & file);
+void save();
 
 char fileName[81];
 fstream file;
@@ -89,8 +90,7 @@ int main(){
        }
        else if (option == 15)
         {
-            file.close();
-            //break;
+            save();
         }
        else if (option==16){
             break;
@@ -236,7 +236,28 @@ void firstIsUpper(fstream & file) {
     file.open(fileName, ios:: out);
     file << str; // write the txt after editing in the main file
 
+}
 
+void save(){
+    char o;
+    cout << "Do you want to save in the (S)ame file or in a (N)ew file ?  ";
+    cin >> o;
+    if (o == 's'){
+       file.close();
+    }
+    else if (o == 'N'){
+        string name;
+        ofstream newFile ;
+        cout << "What 's the new file name?  ";
+        cin.get();
+        file.close(); //close the file and open it again to be sure it is on read mood
+        file.open(fileName, ios :: in);
+        getline(cin , name);
+        newFile.open(name);
+        newFile << file.rdbuf();
+        newFile.close();
+        file.close();
+    }
 }
 
 
