@@ -152,9 +152,7 @@ void encrypt(fstream & file) {
     file.close();
     file.open(fileName,ios::out); //opening the file in write mode to write shifted characters in it
     for(int i =0;i<vector_file.size()-1;i++){
-        if(vector_file[i] == 'z'){file<<'a';}  // z after shifting is a
-        else if(vector_file[i]=='Z'){file<<'A';}
-        else{file << (char)(vector_file[i]+1);} // shifting every character except z
+        file << (char)(vector_file[i]+1); // shifting every character except z
     }
     cout << "file encrypted succefully"<<endl;
 }
@@ -171,11 +169,9 @@ void decrypt(fstream&file){
     file.close();
     file.open(fileName,ios::out);
     for(int i =0;i<vectorFile.size()-1;i++){
-        if(vectorFile[i]=='a'){file<<'z';}
-        else if(vectorFile[i]=='A'){file << 'Z';}
-        else{
-            file << (char)(vectorFile[i]-1);}
+            file << (char)(vectorFile[i]-1);
     }
+
     cout << "file decrypted succesfully"<<endl;
 }
 
