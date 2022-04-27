@@ -12,6 +12,8 @@ void Displaycontent(fstream&file);
 void empty_file(fstream&file);
 void encrypt(fstream&file);
 void decrypt(fstream&file);
+void upperCase(fstream &file);
+void lowerCase(fstream &file);
 
 char fileName[81];
 fstream file;
@@ -30,6 +32,8 @@ int main(){
         cout << "This File Already Exists";
     }
     file.close(); //close the file to open it again but in various moods
+
+
    while (true)
    {
        cout << "\n\t\tPlease pick one option ";
@@ -66,16 +70,24 @@ int main(){
        else if(option == 5){
            decrypt(file);
        }
-        else if (option == 11){
+       else if (option == 11){
             file.open(fileName,ios::in);
             countWord(file);
         }
-        else if (option == 15)
+       else if (option == 12){
+           file.open(fileName);
+           upperCase(file);
+       }
+       else if (option == 13){
+           file.open(fileName);
+           lowerCase(file);
+       }
+       else if (option == 15)
         {
             file.close();
             //break;
         }
-        else if (option==16){
+       else if (option==16){
             break;
         }
 
@@ -161,3 +173,39 @@ void decrypt(fstream&file){
     }
     cout << "file decrypted succesfully"<<endl;
 }
+
+void upperCase(fstream & file) {
+
+    string str ="";
+    while (not file.eof()) {
+        string str1;
+        getline(file, str1);
+        str +=str1;
+    }
+
+    transform(str.begin(), str.end(), str.begin(), ::toupper);
+    file.close();
+    file.open(fileName, ios:: out);
+    file << str;
+
+
+}
+
+void lowerCase(fstream & file) {
+
+    string str ="";
+    while (not file.eof()) {
+        string str1;
+        getline(file, str1);
+        str +=str1;
+    }
+
+    transform(str.begin(), str.end(), str.begin(), ::tolower);
+    file.close();
+    file.open(fileName, ios:: out);
+    file << str;
+
+
+}
+
+
