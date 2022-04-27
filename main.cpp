@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <string>
 #include <cstring>
+#include<vector>
 using namespace std;
 void countWord( fstream & file);
 void appendText(fstream &file);
@@ -12,13 +13,13 @@ void encrypt(fstream&file);
 void decrypt(fstream&file);
 
 char fileName[81];
+fstream file;
+
 
 
 int main(){
-    char fileName[81];
    cout << "Please enter the file name (.txt):  ";
    cin.getline(fileName,81);
-   fstream file;
    file.open(fileName, ios:: in); //opened the file to read only to check if it exits or not
     if (file.fail()){
         file.open(fileName, ios:: in | ios:: out | ios :: app);
@@ -28,8 +29,6 @@ int main(){
         cout << "This File Already Exists";
     }
     file.close(); //close the file to open it again but in various moods
-
-   //file.open(fileName, ios:: in | ios:: out | ios :: app);
    while (true)
    {
        cout << "\n\t\tPlease pick one option ";
@@ -52,22 +51,22 @@ int main(){
        int option;
        cin >> option;
        if(option == 1){
-           file.open(fileName,ios::app);
            appendText(file);
        }
        else if (option == 2){
-           file.open(fileName,ios::in);
            Displaycontent(file);
        }
        else if(option == 3){
-           file.open(fileName,ios::out|ios::trunc);
            empty_file(file);
        }
        else if (option == 4){
-           file.open(fileName,ios::in|ios::out);
            encrypt(file);
        }
+       else if(option == 5){
+           decrypt(file);
+       }
         else if (option == 11){
+            file.open(fileName,ios::in);
             countWord(file);
         }
         else if (option == 15)
@@ -102,6 +101,7 @@ void countWord( fstream & file){
 
 }
 void appendText(fstream & file){
+    file.open(fileName,ios::app);
     char text[81];
     cout << "enter text you want to append:";
     cin.ignore();
@@ -110,41 +110,53 @@ void appendText(fstream & file){
 
 }
 void Displaycontent(fstream & file){
+    file.open(fileName,ios::in);
     char ch;
     cout << endl; //flush
-    while(!file.eof()){
     cout << file.rdbuf();
-    break;
-    }
-
-
-
 }
 void empty_file(fstream & file){
-   file << "";
+    file.open(fileName,ios::out|ios::trunc);
+    file << "";
    cout << "done"<<endl;
 }
-void encrypt(fstream & file){
-    string word;
+void encrypt(fstream & file) {
+    file.open(fileName,ios::in|ios::out);
+    vector<char> vector_file;
+    char ch;
+    cout << endl;
+    while (!file.eof()) {
+        file.get(ch);
+        vector_file.push_back(ch);
+    }
+    file.close();
+    file.open(fileName,ios::out|ios::trunc);
+    file.close();
+    file.open(fileName,ios::out);
+    for(int i =0;i<vector_file.size()-1;i++){
+        if(vector_file[i] == 'z'){file<<'a';}
+        else if(vector_file[i]=='Z'){file<<'A';}
+        else{file << (char)(vector_file[i]+1);}
+    }
+    cout << "file encrypted succefully"<<endl;
+}
+void decrypt(fstream&file){
+    file.open(fileName,ios::in|ios::out);
+    vector<char>vectorFile;
     char ch;
     while(!file.eof()){
         file.get(ch);
-
-    if(ch == 'z'){
-        file.put('a');
+        vectorFile.push_back(ch);
     }
-    else if(ch=='Z'){
-        file.put('A');
+    file.close();
+    file.open(fileName,ios::in|ios::out);
+    file.close();
+    file.open(fileName,ios::out);
+    for(int i =0;i<vectorFile.size()-1;i++){
+        if(vectorFile[i]=='a'){file<<'z';}
+        else if(vectorFile[i]=='A'){file << 'Z';}
+        else{
+            file << (char)(vectorFile[i]-1);}
     }
-    else{file<<(char)ch+1;
-
-    }
-
-    }
-    cout << "encryption done"<<endl;
-
-
-
+    cout << "file decrypted succesfully"<<endl;
 }
-
-
