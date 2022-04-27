@@ -14,6 +14,7 @@ void encrypt(fstream&file);
 void decrypt(fstream&file);
 void upperCase(fstream &file);
 void lowerCase(fstream &file);
+void firstIsUpper (fstream & file);
 
 char fileName[81];
 fstream file;
@@ -81,6 +82,10 @@ int main(){
        else if (option == 13){
            file.open(fileName);
            lowerCase(file);
+       }
+       else if (option == 14){
+           file.open(fileName);
+           firstIsUpper(file);
        }
        else if (option == 15)
         {
@@ -176,23 +181,22 @@ void decrypt(fstream&file){
 
 void upperCase(fstream & file) {
 
-    string str ="";
+    string str =""; //string to copy all the txt in it including spaces
     while (not file.eof()) {
         string str1;
-        getline(file, str1);
-        str +=str1;
+        getline(file, str1); //to read all the file content including spaces
+        str +=str1; //to store all the file content in a one string
     }
 
-    transform(str.begin(), str.end(), str.begin(), ::toupper);
-    file.close();
+    transform(str.begin(), str.end(), str.begin(), ::toupper); //to convert all the txt to upper case
+    file.close(); //close the file to open it again in  write mood so all its content all be deleted
     file.open(fileName, ios:: out);
-    file << str;
+    file << str;  // write the txt after editing in the main file
 
 
 }
 
-void lowerCase(fstream & file) {
-
+void lowerCase (fstream & file) {
     string str ="";
     while (not file.eof()) {
         string str1;
@@ -204,8 +208,36 @@ void lowerCase(fstream & file) {
     file.close();
     file.open(fileName, ios:: out);
     file << str;
+}
+
+void firstIsUpper(fstream & file) {
+
+    string str =""; //string to copy all the txt in it
+    while (not file.eof()) {
+        string str1;
+        getline(file, str1); //get all the content including spaces
+        str +=str1;
+    }
+
+    transform(str.begin(), str.end(), str.begin(), ::tolower); //convert all the txt to lower case
+
+    int length = str.size(); //get the txt size to loop on it
+
+    for (int i = 0 ; i < length; i++){
+        if(i == 0){
+            str[i] = toupper(str[i]); //special case to convert the first character to upper case
+        }
+        else if (str [i-1] == ' '){  //check if the previous character is space so the current character is the first of the word
+            str[i] = toupper(str[i]); //convert the first character to upper case
+        }
+    }
+    cout << str;
+    file.close(); //close the file to open it again in  write mood so all its content all be deleted
+    file.open(fileName, ios:: out);
+    file << str; // write the txt after editing in the main file
 
 
 }
+
 
 
