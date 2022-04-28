@@ -5,114 +5,12 @@
 #include <cstring>
 #include<vector>
 #include<sstream>
+#include "CS112-203-2nd-S1-20210049-20210067-20210133-A4-TextEditorFunc.h"
 
 using namespace std;
 
-void countWord( fstream & file);
-void appendText(fstream &file);
-void Displaycontent(fstream&file);
-void empty_file(fstream&file);
-void encrypt(fstream&file);
-
-void merge();
-void count_words();
-void count_chars();
-void count_lines();
-void search_word();
-
-void decrypt(fstream&file);
-void upperCase(fstream &file);
-void lowerCase(fstream &file);
-void firstIsUpper (fstream & file);
-void save();
-
 char fileName[81];
 fstream file;
-
-
-
-int main(){
-   cout << "Please enter the file name (.txt):  ";
-   cin.getline(fileName,81);
-   file.open(fileName, ios:: in); //opened the file to read only to check if it exits or not
-    if (file.fail()){
-        file.open(fileName, ios :: app);
-        cout << "This is a new file. I created it for you" << char(1);
-    }
-    else {
-        cout << "This File Already Exists";
-    }
-    file.close(); //close the file to open it again but in various moods
-
-
-   while (true)
-   {
-       cout << "\n\t\tPlease pick one option ";
-       cout << "\n1. Add new text to the end of the file \n";
-       cout << "2. Display the content of the file\n";
-       cout << "3. Empty the file\n";
-       cout << "4. Encrypt the file content \n";
-       cout << "5. Decrypt the file content\n";
-       cout << "6. Merge another file\n";
-       cout << "7. Count the number of words in the file.\n";
-       cout << "8. Count the number of characters in the file\n";
-       cout << "9. Count the number of lines in the file\n";
-       cout << "10. Search for a word in the file\n";
-       cout << "11. Count the number of times a word exists in the file\n";
-       cout << "12. Turn the file content to upper case.\n";
-       cout << "13. Turn the file content to lower case.\n";
-       cout << "14. Turn file content to 1st caps (1st char of each word is capital) \n";
-       cout << "15. Save\n16. Exit";
-       cout << "\n--> ";
-       int option;
-       cin >> option;
-       if(option == 1){
-           appendText(file);
-       }
-       else if (option == 2){
-           Displaycontent(file);
-       }
-       else if(option == 3){
-           empty_file(file);
-       }
-       else if (option == 4){
-           encrypt(file);
-       }
-       else if(option == 5){
-           decrypt(file);
-       }
-
-       else if(option == 6) merge();
-       else if(option == 7) count_words();
-       else if(option == 8) count_chars();
-       else if(option == 9) count_lines();
-       else if(option == 10) search_word();
-
-       else if (option == 11){
-            file.open(fileName,ios::in);
-            countWord(file);
-        }
-       else if (option == 12){
-           file.open(fileName);
-           upperCase(file);
-       }
-       else if (option == 13){
-           file.open(fileName);
-           lowerCase(file);
-       }
-       else if (option == 14){
-           file.open(fileName);
-           firstIsUpper(file);
-       }
-       else if (option == 15)
-        {
-            save();
-        }
-       else if (option==16){
-            break;
-        }
-   }
-}
 
 void countWord( fstream & file){
     int c= 0; //start the counting
@@ -150,7 +48,7 @@ void Displaycontent(fstream & file){
 void empty_file(fstream & file){
     file.open(fileName,ios::out|ios::trunc); // deleting content in the file
     file << "";
-   cout << "done"<<endl;
+    cout << "done"<<endl;
 }
 void encrypt(fstream & file) {
     file.open(fileName,ios::in|ios::out); // read and write mode
@@ -183,7 +81,7 @@ void decrypt(fstream&file){
     file.close();
     file.open(fileName,ios::out);
     for(int i =0;i<vectorFile.size()-1;i++){
-            file << (char)(vectorFile[i]-1);
+        file << (char)(vectorFile[i]-1);
     }
 
     cout << "file decrypted succesfully"<<endl;
@@ -253,7 +151,7 @@ void save(){
     cout << "Do you want to save in the (S)ame file or in a (N)ew file ?  ";
     cin >> o;
     if (o == 's'){
-       file.close();
+        file.close();
     }
     else if (o == 'N'){
         string name;
@@ -275,25 +173,25 @@ void merge()
     file.open(fileName,ios::app | ios::out);
     fstream file1;
     string file1name;
+    cout << "enter the second file name (.txt) : ";
+    cin.ignore();
+    getline(cin,file1name);
+    file1.open(file1name,ios::in);
+    while(!file1)
+    {
+        cout <<"Invalid File Name\n";
         cout << "enter the second file name (.txt) : ";
-        cin.ignore();
         getline(cin,file1name);
         file1.open(file1name,ios::in);
-        while(!file1)
-        {
-            cout <<"Invalid File Name\n";
-            cout << "enter the second file name (.txt) : ";
-            getline(cin,file1name);
-            file1.open(file1name,ios::in);
-        }
-        string line;
-        while(getline(file1,line))
-        {
-            file << line << endl;
-        }
-        file1.close();
-        file.close();
-        cout << "\nDONE\n";
+    }
+    string line;
+    while(getline(file1,line))
+    {
+        file << line << endl;
+    }
+    file1.close();
+    file.close();
+    cout << "\nDONE\n";
 
 
 
