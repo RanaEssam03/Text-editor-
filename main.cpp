@@ -5,12 +5,21 @@
 #include <cstring>
 #include<vector>
 #include<sstream>
+
 using namespace std;
+
 void countWord( fstream & file);
 void appendText(fstream &file);
 void Displaycontent(fstream&file);
 void empty_file(fstream&file);
 void encrypt(fstream&file);
+
+void merge();
+void count_words();
+void count_chars();
+void count_lines();
+void search_word();
+
 void decrypt(fstream&file);
 void upperCase(fstream &file);
 void lowerCase(fstream &file);
@@ -27,8 +36,8 @@ int main(){
    cin.getline(fileName,81);
    file.open(fileName, ios:: in); //opened the file to read only to check if it exits or not
     if (file.fail()){
-        file.open(fileName, ios:: in | ios:: out | ios :: app);
-        cout << "This is a new file. I created it for you " << char(1);
+        file.open(fileName, ios :: app);
+        cout << "This is a new file. I created it for you" << char(1);
     }
     else {
         cout << "This File Already Exists";
@@ -72,6 +81,13 @@ int main(){
        else if(option == 5){
            decrypt(file);
        }
+
+       else if(option == 6) merge();
+       else if(option == 7) count_words();
+       else if(option == 8) count_chars();
+       else if(option == 9) count_lines();
+       else if(option == 10) search_word();
+
        else if (option == 11){
             file.open(fileName,ios::in);
             countWord(file);
@@ -95,9 +111,7 @@ int main(){
        else if (option==16){
             break;
         }
-
    }
-
 }
 
 void countWord( fstream & file){
@@ -260,5 +274,111 @@ void save(){
     }
 }
 
+void merge()
+{
+    file.open(fileName,ios::app | ios::out);
+    fstream file1;
+    string file1name;
+        cout << "enter the second file name (.txt) : ";
+        cin.ignore();
+        getline(cin,file1name);
+        file1.open(file1name,ios::in);
+        while(!file1)
+        {
+            cout <<"Invalid File Name\n";
+            cout << "enter the second file name (.txt) : ";
+            getline(cin,file1name);
+            file1.open(file1name,ios::in);
+        }
+        string line;
+        while(getline(file1,line))
+        {
+            file << line << endl;
+        }
+        file1.close();
+        file.close();
+        cout << "\nDONE\n";
 
 
+
+}
+void count_words()
+{
+    file.open(fileName,ios::in);
+    string word;
+    int counter=0;
+    while(file >> word)
+    {
+        counter++;
+    }
+    file.close();
+    cout << "The number of words in the file = " << counter<<endl;
+}
+void count_chars()
+{
+    file.open(fileName,ios::in);
+    string word;
+    int counter=0;
+    while(file >> word)
+    {
+        counter++;
+    }
+    file.close();
+    file.open(fileName,ios::in);
+    int i=0;
+    string arr[counter];
+    while(file >> word)
+    {
+        arr[i]=word;
+        i++;
+    }
+    file.close();
+    int num=0;
+    for(int j=0;j<counter;j++)
+    {
+        num=num+arr[j].size();
+    }
+    cout << "the number of chars = " << num+counter-1 << endl;
+}
+void count_lines()
+{
+    file.open(fileName,ios::in);
+    string line;
+    int counter=0;
+    while(getline(file,line))
+    {
+        counter++;
+    }
+    file.close();
+    cout << "The number of lines in the file = " << counter<<endl;
+}
+void search_word()
+{
+    cin.ignore();
+    string input;
+    cout << "Enter a word to search for : ";
+    cin >> input;
+    for_each(input.begin(), input.end(), [](char & c){c = toupper(c);});
+    file.open(fileName,ios::in);
+    string word;
+    bool flag=true;
+    while(file >> word)
+    {
+        for_each(word.begin(), word.end(), [](char & c){c = toupper(c);});
+        if(word == input)
+        {
+            cout << "Word was found in the file " << char(1)<<endl;
+            flag=true;
+            break;
+        }
+        else
+        {
+            flag=false;
+        }
+    }
+    if(flag==false)
+    {
+        cout << "Word was not found in the file" << endl;
+    }
+    file.close();
+}

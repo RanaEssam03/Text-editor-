@@ -3,5 +3,4 @@ project(Text_editor_)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(Text_editor_
-        main.cpp)
+add_executable(Text_editor_ main.cpp)
