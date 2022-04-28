@@ -1,6 +1,9 @@
+//
+// Created by hp on 4/28/2022.
+//
 
-#ifndef TEXT_EDITOR__TEXT_EDITOR_H
-#define TEXT_EDITOR__TEXT_EDITOR_H
+#ifndef TEXT_EDITOR__CS112_203_2ND_S1_20210049_20210067_20210133_A4_TEXTEDITORFUNC_H
+#define TEXT_EDITOR__CS112_203_2ND_S1_20210049_20210067_20210133_A4_TEXTEDITORFUNC_H
 #include<fstream>
 using namespace std;
 char fileName[81];
@@ -23,5 +26,4 @@ void lowerCase(fstream &file);
 void firstIsUpper (fstream & file);
 void save();
 
-
-#endif //TEXT_EDITOR__TEXT_EDITOR_H
+#endif //TEXT_EDITOR__CS112_203_2ND_S1_20210049_20210067_20210133_A4_TEXTEDITORFUNC_H

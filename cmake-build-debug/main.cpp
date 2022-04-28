@@ -4,14 +4,10 @@
 #include <string>
 #include <cstring>
 #include<vector>
-#include<sstream>
 #include"CS112-203-2nd-S1-20210049-20210067-20210133-A4-TextEditorFunc.h"
 #include "CS112-203-2nd-S1-20210049-20210067-20210133-A4-TextEditorFunc.cpp"
 
 using namespace std;
-
-extern char fileName[81];
-extern fstream file;
 
 int main(){
     cout << "Please enter the file name (.txt):  ";
