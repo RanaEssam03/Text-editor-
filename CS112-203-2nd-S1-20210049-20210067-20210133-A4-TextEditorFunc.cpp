@@ -6,6 +6,7 @@
 #include<vector>
 #include<sstream>
 #include"CS112-203-2nd-S1-20210049-20210067-20210133-A4-TextEditorFunc.h"
+
 using namespace std;
 void appendText(fstream & file){
     file.open(fileName,ios::app); // opening file in append mode

@@ -1,5 +1,4 @@
 
-
 #ifndef TEXT_EDITOR__TEXT_EDITOR_H
 #define TEXT_EDITOR__TEXT_EDITOR_H
 #include<fstream>
