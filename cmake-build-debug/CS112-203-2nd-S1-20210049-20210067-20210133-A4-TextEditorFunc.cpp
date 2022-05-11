@@ -115,29 +115,17 @@ void lowerCase (fstream & file) {
 }
 void firstIsUpper(fstream & file) {
 
-    string str =""; //string to copy all the txt in it
+    string newStr =""; //string to copy all the txt in it
     while (not file.eof()) {
-        string str1;
-        getline(file, str1); //get all the content including spaces
-        str +=str1;
+        string str;
+        file >> str; //get the text word by word
+        transform(str.begin(), str.end(), str.begin(), ::tolower); //covert all the characters to lower case
+        str[0] = toupper(str[0]);//convert the first character to upper case
+        newStr += str +" "; //append the word after convert to the rest
     }
-
-    transform(str.begin(), str.end(), str.begin(), ::tolower); //convert all the txt to lower case
-
-    int length = str.size(); //get the txt size to loop on it
-
-    for (int i = 0 ; i < length; i++){
-        if(i == 0){
-            str[i] = toupper(str[i]); //special case to convert the first character to upper case
-        }
-        else if (str [i-1] == ' '){  //check if the previous character is space so the current character is the first of the word
-            str[i] = toupper(str[i]); //convert the first character to upper case
-        }
-    }
-    cout << str;
     file.close(); //close the file to open it again in  write mood so all its content all be deleted
     file.open(fileName, ios:: out);
-    file << str; // write the txt after editing in the main file
+    file << newStr; // write the txt after editing in the main file
 
 }
 
@@ -267,5 +255,6 @@ void search_word()
         cout << "Word was not found in the file" << endl;
     }
     file.close();}
+
 
 

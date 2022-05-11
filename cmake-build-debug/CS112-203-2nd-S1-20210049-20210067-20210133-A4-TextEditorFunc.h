@@ -11,7 +11,6 @@ void appendText(fstream &file);
 void Displaycontent(fstream&file);
 void empty_file(fstream&file);
 void encrypt(fstream&file);
-
 void merge();
 void count_words();
 void count_chars();
